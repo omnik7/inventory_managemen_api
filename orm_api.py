@@ -2,9 +2,10 @@ from fastapi import FastAPI,HTTPException,Depends,Header,APIRouter
 from sqlmodel import Field,Session,SQLModel,create_engine,select,Relationship
 
 app=FastAPI()
+apicode=os.getenv("MY_API_Tokken")
 
 def verify_tokken(x_tokken:str=Header(default=None)):
-    if x_tokken!="supersecret1234":
+    if x_tokken!=apicode:
         raise HTTPException(status_code=401,detail="Unauthorized:Invalid API Tokken")
 protected_router=APIRouter(dependencies=[Depends(verify_tokken)])
 sqlite_file_name="morden_datbase.db"
