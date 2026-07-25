@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app=FastAPI()
+#env for security
 apicode=os.getenv("MY_API_Tokken")
 
 def verify_tokken(x_tokken:str=Header(default=None)):
