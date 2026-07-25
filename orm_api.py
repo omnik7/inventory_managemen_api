@@ -1,5 +1,8 @@
+import os
 from fastapi import FastAPI,HTTPException,Depends,Header,APIRouter
 from sqlmodel import Field,Session,SQLModel,create_engine,select,Relationship
+from dotenv import load_dotenv
+load_dotenv()
 
 app=FastAPI()
 apicode=os.getenv("MY_API_Tokken")
