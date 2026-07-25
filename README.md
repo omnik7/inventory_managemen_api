@@ -3,8 +3,8 @@
 A high-performance RESTful API designed for user registration and dynamic inventory tracking. This backend architecture was built utilizing FastAPI, which operates as one of the fastest Python frameworks available today.
 
 ## 🌐 Live Demo
-* **API Base URL:** `https://your-project-name.onrender.com`
-* **Interactive Documentation (Swagger):** `https://your-project-name.onrender.com/docs`
+* **API Base URL:** `https://inventory-managemen-api.onrender.com/`
+* **Interactive Documentation (Swagger):** `https://inventory-managemen-api.onrender.com/docs`
 
 ## 🛠️ Tech Stack
 * **Language:** Python 3
@@ -23,5 +23,5 @@ A high-performance RESTful API designed for user registration and dynamic invent
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-   cd your-repo-name
+   git clone [https://github.com/omnik7/inventory_managemen_api.git](https://github.com/omnik7/inventory_managemen_api.git)
+   cd inventory_managemen_api
