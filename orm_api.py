@@ -86,6 +86,11 @@ def update_item(item_ID:int,item:Item):
         session.commit() 
         return {"message":"item updated"}
 @protected_router.patch("/item/modify/{item_ID}")
+@app.get("/health")
+def healthCheck():
+    return{
+        "message":"Sys_Online"
+    }
 def modify(item_ID:int,itemUpdate:ItemUpdate):
     with Session(engine) as session:
         cur=session.get(Item,item_ID)
