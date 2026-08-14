@@ -23,5 +23,5 @@ A high-performance RESTful API designed for user registration and dynamic invent
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/omnik7/inventory_managemen_api.git](https://github.com/omnik7/inventory_managemen_api.git)
+   git clone https://github.com/omnik7/inventory_managemen_api.git
    cd inventory_managemen_api
