@@ -5,22 +5,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app=FastAPI()
-
 #env for security
 apicode=os.getenv("MY_API_Tokken")
 
 def verify_tokken(x_tokken:str=Header(default=None)):
     if x_tokken!=apicode:
         raise HTTPException(status_code=401,detail="Unauthorized:Invalid API Tokken")
-
 protected_router=APIRouter(dependencies=[Depends(verify_tokken)])
 sqlite_file_name="morden_datbase.db"
-
-#POSTGRES URL
-
-postgresql_url=os.getenv("DATABASE_URL")
-engine=create_engine(postgresql_url,echo=True)
-
+sqlite_url=f"sqlite:///{sqlite_file_name}"
+engine=create_engine(sqlite_url)
 class User(SQLModel,table=True):
     id:int|None=Field(default=None,primary_key=True)
     username:str
@@ -35,7 +29,7 @@ class ItemUpdate(SQLModel):
     price:int|None=None
     name:str|None=None
 
-    
+     
 @app.on_event("startup")
 def on_startup():
     SQLModel.metadata.create_all(engine)
@@ -93,11 +87,6 @@ def update_item(item_ID:int,item:Item):
         session.commit() 
         return {"message":"item updated"}
 @protected_router.patch("/item/modify/{item_ID}")
-@app.get("/health")
-def healthCheck():
-    return{
-        "message":"Sys_Online"
-    }
 def modify(item_ID:int,itemUpdate:ItemUpdate):
     with Session(engine) as session:
         cur=session.get(Item,item_ID)
@@ -110,4 +99,9 @@ def modify(item_ID:int,itemUpdate:ItemUpdate):
         session.add(cur)
         session.commit()
         return{"message":"item modified"}
+@app.get("/health")
+def healthCheck():
+    return{
+        "message":"Sys_Online"
+    }
 app.include_router(protected_router)
