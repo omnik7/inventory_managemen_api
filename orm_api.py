@@ -5,16 +5,22 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app=FastAPI()
+
 #env for security
 apicode=os.getenv("MY_API_Tokken")
 
 def verify_tokken(x_tokken:str=Header(default=None)):
     if x_tokken!=apicode:
         raise HTTPException(status_code=401,detail="Unauthorized:Invalid API Tokken")
+
 protected_router=APIRouter(dependencies=[Depends(verify_tokken)])
 sqlite_file_name="morden_datbase.db"
-sqlite_url=f"sqlite:///{sqlite_file_name}"
-engine=create_engine(sqlite_url)
+
+#POSTGRES URL
+
+postgresql_url=os.getenv("DATABASE_URL")
+engine=create_engine(postgresql_url,echo=True)
+
 class User(SQLModel,table=True):
     id:int|None=Field(default=None,primary_key=True)
     username:str
